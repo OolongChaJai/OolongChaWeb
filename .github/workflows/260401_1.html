@@ -1,0 +1,282 @@
+<!DOCTYPE html><html lang="zh-Hant"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>定期存款比較表 — HKD 2,000,000</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: #f0f2f5; color: #1a1a2e; padding: 16px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 1.35rem; text-align: center; margin-bottom: 4px; color: #1a1a2e; }
+  .subtitle { text-align: center; font-size: 0.85rem; color: #666; margin-bottom: 20px; }
+  .section-title { font-size: 1.05rem; font-weight: 700; margin: 24px 0 10px; padding-left: 10px; border-left: 4px solid #2563eb; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.07); margin-bottom: 18px; }
+  thead th { background: #1a1a2e; color: #fff; padding: 12px 10px; font-size: 0.82rem; text-align: center; }
+  thead th:first-child { text-align: left; }
+  tbody td { padding: 11px 10px; text-align: center; border-bottom: 1px solid #eee; font-size: 0.82rem; }
+  tbody td:first-child { text-align: left; font-weight: 600; }
+  tbody tr:last-child td { border-bottom: none; }
+  .rate { font-size: 1.05rem; font-weight: 700; color: #2563eb; }
+  .interest { font-size: 0.85rem; color: #16a34a; font-weight: 600; }
+  .na { color: #999; font-style: italic; font-size: 0.8rem; }
+  .bank-hsbc { border-left: 4px solid #db0011; }
+  .bank-sc { border-left: 4px solid #0072aa; }
+  .bank-dbs { border-left: 4px solid #e21a22; }
+  .badge { display: inline-block; font-size: 0.65rem; padding: 2px 6px; border-radius: 4px; margin-left: 4px; vertical-align: middle; font-weight: 600; }
+  .badge-td { background: #e0f2fe; color: #0369a1; }
+  .badge-save { background: #fef3c7; color: #92400e; }
+  .badge-headline { background: #fce7f3; color: #9d174d; }
+  .note-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px; margin: 16px 0; font-size: 0.78rem; color: #78350f; line-height: 1.6; }
+  .note-box strong { color: #92400e; }
+  .highlight-row { background: #f0fdf4; }
+  .best { position: relative; }
+  .best::after { content: '✦ 最高'; font-size: 0.6rem; color: #f59e0b; font-weight: 700; display: block; margin-top: 2px; }
+  .summary-card { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 18px 0; }
+  .card { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .card h3 { font-size: 0.9rem; margin-bottom: 8px; }
+  .card .logo-bar { height: 4px; border-radius: 2px; margin-bottom: 12px; }
+  .card .logo-bar.hsbc { background: #db0011; }
+  .card .logo-bar.sc { background: #0072aa; }
+  .card .logo-bar.dbs { background: #e21a22; }
+  .card .val { font-size: 1.5rem; font-weight: 800; color: #16a34a; }
+  .card .desc { font-size: 0.75rem; color: #666; margin-top: 4px; }
+  .footnote { font-size: 0.72rem; color: #888; margin-top: 14px; line-height: 1.65; }
+  @media (max-width: 600px) {
+    table { font-size: 0.75rem; }
+    thead th, tbody td { padding: 8px 6px; }
+    .rate { font-size: 0.9rem; }
+    h1 { font-size: 1.1rem; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>港元定期存款回報比較</h1>
+<p class="subtitle">本金：HKD 2,000,000 ｜ 資料日期：2026年3月底至4月初</p>
+
+<!-- ============ MAIN COMPARISON TABLE ============ -->
+<p class="section-title">年利率及預計利息比較</p>
+<table>
+  <thead>
+    <tr>
+      <th style="min-width:130px;">銀行 / 產品</th>
+      <th>3 個月<br><span style="font-weight:400;font-size:0.7rem;">≈ 91 天</span></th>
+      <th>6 個月<br><span style="font-weight:400;font-size:0.7rem;">≈ 182 天</span></th>
+      <th>12 個月<br><span style="font-weight:400;font-size:0.7rem;">≈ 365 天</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- HSBC -->
+    <tr class="bank-hsbc">
+      <td>
+        滙豐 HSBC<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">新資金定期存款（網上）</span>
+        <span class="badge badge-td">定存</span>
+      </td>
+      <td>
+        <div class="rate">2.20%</div>
+        <div class="interest">≈ HK$10,970</div>
+      </td>
+      <td>
+        <div class="rate">2.00%</div>
+        <div class="interest">≈ HK$19,945</div>
+      </td>
+      <td>
+        <span class="na">港元不適用</span>
+      </td>
+    </tr>
+    <!-- HSBC branch -->
+    <tr class="bank-hsbc" style="background:#fafafa;">
+      <td>
+        滙豐 HSBC<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">新資金定存（分行 — 卓越理財尊尚）</span>
+        <span class="badge badge-td">定存</span>
+      </td>
+      <td>
+        <div class="rate">2.20%</div>
+        <div class="interest">≈ HK$10,970</div>
+      </td>
+      <td>
+        <div class="rate">2.00%</div>
+        <div class="interest">≈ HK$19,945</div>
+      </td>
+      <td>
+        <span class="na">港元不適用</span>
+      </td>
+    </tr>
+    <tr class="bank-hsbc" style="background:#fafafa;">
+      <td>
+        滙豐 HSBC<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">新資金定存（分行 — 卓越理財）</span>
+        <span class="badge badge-td">定存</span>
+      </td>
+      <td>
+        <div class="rate">2.10%</div>
+        <div class="interest">≈ HK$10,471</div>
+      </td>
+      <td>
+        <div class="rate">1.90%</div>
+        <div class="interest">≈ HK$18,948</div>
+      </td>
+      <td>
+        <span class="na">港元不適用</span>
+      </td>
+    </tr>
+    <tr class="bank-hsbc" style="background:#fafafa;">
+      <td>
+        滙豐 HSBC<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">新資金定存（分行 — One／其他）</span>
+        <span class="badge badge-td">定存</span>
+      </td>
+      <td>
+        <div class="rate">2.00%</div>
+        <div class="interest">≈ HK$9,973</div>
+      </td>
+      <td>
+        <div class="rate">1.80%</div>
+        <div class="interest">≈ HK$17,951</div>
+      </td>
+      <td>
+        <span class="na">港元不適用</span>
+      </td>
+    </tr>
+
+    <!-- SC -->
+    <tr class="bank-sc highlight-row">
+      <td>
+        渣打 SC<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">高息馬拉松活期存款</span>
+        <span class="badge badge-save">活期</span>
+      </td>
+      <td colspan="3" style="text-align:left;line-height:1.7;">
+        <strong style="color:#0072aa;">階梯式活期年利率（非定存）：</strong><br>
+        開戶日 → 2026/5/31：<span class="rate" style="font-size:0.9rem;">2.10%</span><br>
+        2026/6/1 → 7/1：<span class="rate" style="font-size:0.9rem;">2.30%</span><br>
+        2026/7/2 → 8/3：<span class="rate" style="font-size:0.9rem;">2.40%</span><br>
+        <span style="font-size:0.75rem;color:#666;">~125 天加權平均年利率 ≈ 2.23%</span><br>
+        <span class="interest" style="font-size:0.88rem;">預計總利息 ≈ HK$15,263</span>
+      </td>
+    </tr>
+
+    <!-- DBS -->
+    <tr class="bank-dbs">
+      <td>
+        星展 DBS<br>
+        <span style="font-size:0.72rem;font-weight:400;color:#555;">網上定期存款</span>
+        <span class="badge badge-headline">僅標題利率</span>
+      </td>
+      <td colspan="3" style="text-align:center;">
+        <div class="rate" style="font-size:1.1rem;">高達 3.30% p.a.</div>
+        <div style="font-size:0.75rem;color:#999;margin-top:4px;">
+          網頁未披露各存期詳細利率，僅顯示最高可達 3.30%<br>
+          建議登入 DBS digibank 或致電查詢具體利率
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============ HSBC FX + TD ============ -->
+<p class="section-title">滙豐「外幣兌換＋定存」短期高息優惠（需先兌換貨幣）</p>
+<table>
+  <thead>
+    <tr>
+      <th>客戶級別</th>
+      <th>1 週（流動理財）</th>
+      <th>1 週（分行）</th>
+      <th>1 個月（所有渠道）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600;">卓越理財尊尚</td>
+      <td>
+        <div class="rate best">6.00%</div>
+        <div class="interest">≈ HK$2,301</div>
+      </td>
+      <td>
+        <div class="rate">5.00%</div>
+        <div class="interest">≈ HK$1,918</div>
+      </td>
+      <td>
+        <div class="rate">3.00%</div>
+        <div class="interest">≈ HK$4,932</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">卓越理財</td>
+      <td>
+        <div class="rate">5.90%</div>
+        <div class="interest">≈ HK$2,263</div>
+      </td>
+      <td>
+        <div class="rate">4.90%</div>
+        <div class="interest">≈ HK$1,879</div>
+      </td>
+      <td>
+        <div class="rate">2.90%</div>
+        <div class="interest">≈ HK$4,767</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">One ／其他</td>
+      <td>
+        <div class="rate">5.80%</div>
+        <div class="interest">≈ HK$2,225</div>
+      </td>
+      <td>
+        <div class="rate">4.80%</div>
+        <div class="interest">≈ HK$1,841</div>
+      </td>
+      <td>
+        <div class="rate">2.80%</div>
+        <div class="interest">≈ HK$4,603</div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="note-box">
+  <strong>⚠️ 注意：</strong>「外幣兌換＋定存」優惠須先將港元兌換為指定外幣（或反向），再開立定存，因此涉及<strong>匯率風險</strong>。以上利息以兌換後存入港元定存計算，1 週按 7 天、1 個月按 30 天估算。
+</div>
+
+<!-- ============ SUMMARY ============ -->
+<p class="section-title">3 個月回報速覽</p>
+<div class="summary-card">
+  <div class="card">
+    <div class="logo-bar hsbc"></div>
+    <h3>滙豐 HSBC（網上新資金定存）</h3>
+    <div class="val">HK$10,970</div>
+    <div class="desc">年利率 2.20% ｜ 3 個月定存</div>
+  </div>
+  <div class="card">
+    <div class="logo-bar sc"></div>
+    <h3>渣打 SC（馬拉松活期）</h3>
+    <div class="val">~HK$10,356*</div>
+    <div class="desc">平均 ~2.10% p.a. ｜ 首 ~91 天活期<br><span style="font-size:0.68rem;">*活期非定存，資金可隨時提取</span></div>
+  </div>
+  <div class="card">
+    <div class="logo-bar dbs"></div>
+    <h3>星展 DBS（網上定存）</h3>
+    <div class="val" style="color:#999;">待查詢</div>
+    <div class="desc">標題利率高達 3.30% p.a.<br>具體分期利率需登入查閱</div>
+  </div>
+</div>
+
+<!-- ============ NOTES ============ -->
+<div class="note-box">
+  <strong>📌 重要說明：</strong><br>
+  1. 滙豐港元定存僅提供 3 個月及 6 個月選項，無 12 個月；網上開立各客戶級別利率一致。<br>
+  2. 渣打「高息馬拉松活期存款」<strong>並非定期存款</strong>，屬階梯式活期儲蓄，推廣期至 2026/5/2 開戶、優惠期至 2026/8/3，開戶後不可再存入。<br>
+  3. 星展 DBS 網頁僅顯示標題利率「高達 3.30% p.a.」，未公佈各存期明細，實際利率請透過 DBS digibank 或分行查詢。<br>
+  4. 所有利息均為稅前估算，實際金額以銀行確認為準。利率以 2026 年 3 月底為參考，隨時可能調整。<br>
+  5. 「新資金」定義各銀行不同 — 滙豐以 7 個曆日前結餘對比計算；渣打須為非行內現有資金。
+</div>
+
+<p class="footnote">
+  資料來源：滙豐 hsbc.com.hk（2026/3/2 示例利率）、渣打 sc.com/hk（2026/3-4月推廣）、星展 dbs.com.hk。本表僅供參考，不構成任何投資建議。利率隨市況變動，請以各銀行最新公告為準。
+</p>
+
+</div>
+
+
+</body></html>
